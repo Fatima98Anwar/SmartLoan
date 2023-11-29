@@ -9,50 +9,48 @@ import { AiOutlineTransaction } from "react-icons/ai";
 import { RiSecurePaymentFill } from "react-icons/ri";
 import { BiSupport } from "react-icons/bi";
 import { IoSettingsOutline } from "react-icons/io5";
-import { IoArrowBackCircle } from "react-icons/io5";
-import { IoMenu } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 import logo from "./logo.png";
 
 const routes = [
   {
     name: "User",
-    path: "./components/User",
+    path: "user",
     icon: <FaUserAlt />,
   },
   {
     name: "Dashboard",
-    path: "./components/Dashboard",
+    path: "/dashboard",
     icon: <LuLayoutDashboard />,
   },
   {
     name: "Loan Application",
-    path: "./components/LoanApplication",
+    path: "/upload",
     icon: <FaWpforms />,
   },
   {
     name: "Loan Status",
-    path: "./components/LoanStatus",
+    path: "/loanStatus",
     icon: <MdOutlineDownloading />,
   },
   {
     name: "Loan Tracking",
-    path: "./components/LoanTracking",
+    path: "trackloan",
     icon: <MdTrackChanges />,
   },
   {
     name: "Accounts",
-    path: "./components/Accounts",
+    path: "/accounts",
     icon: <FcMoneyTransfer />,
   },
   {
     name: "Transaction",
-    path: "./components/Transaction",
+    path: "/transaction",
     icon: <AiOutlineTransaction />,
   },
   {
     name: "Payment Method",
-    path: "./components/PaymentMethod",
+    path: "/paymentmethod",
     icon: <RiSecurePaymentFill />,
   },
 ];
@@ -60,12 +58,12 @@ const routes = [
 const extra = [
   {
     name: "Support",
-    path: "./components/Support",
+    path: "/support",
     icon: <BiSupport />,
   },
   {
     name: "Settings",
-    path: "./components/Settings",
+    path: "/settings",
     icon: <IoSettingsOutline />,
   },
 ];

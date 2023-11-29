@@ -1,0 +1,24 @@
+.BarContainer {
+  display: flex;
+  flex-direction: row;
+  background: rgba(195, 195, 195, 0.516);
+  width: 200%;
+  height: 50px;
+  align-items: flex-start;
+  margin-left: -20px;
+  margin-top: -20px;
+}
+
+.searchbar {
+  display: flex;
+  flex-direction: row;
+}
+.input {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.search-icon {
+  margin-top: 10px;
+  margin-left: 10px;
+  size: 10px;
+}

@@ -1,0 +1,95 @@
+.Upload-Container {
+  display: flex;
+  flex-direction: column;
+  height: 650px;
+  width: 1000px;
+  margin-top: 70px;
+  margin-left: 90px;
+  border: 2px solid #028ab6;
+  box-sizing: border-box;
+}
+.innerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.UploadText {
+  margin-top: 50px;
+  align-self: center;
+}
+.PicUpload {
+  height: 384px;
+  width: 341px;
+  border: 4px solid #72d7f5;
+  margin-top: 70px;
+  margin-left: 120px;
+  flex-direction: column;
+}
+.pic {
+  height: 168px;
+  width: 224px;
+  align-self: center;
+  margin-top: 65px;
+  margin-left: 45px;
+}
+.picText1,
+.pdfText1,
+.pdfText2,
+.picText2,
+.picText3,
+.pdfText3 {
+  text-align: center; /* Center text horizontally */
+}
+.picText1,
+.pdfText1,
+.picText2,
+.pdfText2 {
+  margin-top: 10px;
+}
+
+.picText3 {
+  margin-top: -15px;
+}
+.pdfText3 {
+  margin-top: 15px;
+}
+.PdfUpload {
+  height: 384px;
+  width: 341px;
+  align-self: flex-end;
+  border: 4px solid #e46e6b;
+  margin-right: 120px;
+  flex-direction: column;
+}
+.pdf {
+  height: 120px;
+  width: 120px;
+  align-self: center;
+  margin-top: 80px;
+  margin-left: 100px;
+}
+
+.btn-pdf,
+.btn-pic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 100px;
+  margin-top: 20px;
+  margin-left: 120px;
+  margin-right: 120px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-pic {
+  background-color: #72d7f5;
+}
+.btn-pdf {
+  background-color: #e46e6b;
+}

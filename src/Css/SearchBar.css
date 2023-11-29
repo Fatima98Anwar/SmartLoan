@@ -1,24 +1,26 @@
+/* Adjust the styles to position the search bar correctly */
+.searchbarContainer {
+  align-items: flex-start;
+}
 .BarContainer {
   display: flex;
   flex-direction: row;
   background: rgba(195, 195, 195, 0.516);
-  width: 200%;
+  width: 650%;
   height: 50px;
-  align-items: flex-start;
-  margin-left: -20px;
-  margin-top: -20px;
+  align-items: center; /* Center items vertically */
 }
 
 .searchbar {
   display: flex;
-  flex-direction: row;
+  flex: 1; /* Use flex to take up remaining space */
 }
+
 .input {
-  margin-top: 10px;
   margin-left: 10px;
 }
+
 .search-icon {
-  margin-top: 10px;
   margin-left: 10px;
-  size: 10px;
+  font-size: 20px;
 }

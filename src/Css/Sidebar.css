@@ -4,6 +4,16 @@
   box-sizing: border-box;
 }
 
+.main-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.FlexContainer {
+  display: flex;
+  flex-direction: row;
+}
+
 .Sidebar {
   background: #00215b;
   color: white;

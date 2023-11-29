@@ -11,6 +11,8 @@ import { BiSupport } from "react-icons/bi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 import logo from "./logo.png";
+import SearchBar from "../Components/SearchBar";
+import UploadDoc from "../Components/UploadDoc";
 
 const routes = [
   {
@@ -71,32 +73,38 @@ const extra = [
 const Sidebar = ({ children }) => {
   return (
     <div className="main-container">
-      <div className="Sidebar">
-        <div className="Logo">
-          <img className="LogoImage" src={logo} alt="logo" />
-          <div className="Text">
-            <h1 className="SmartLoan">Smart Loan</h1>
-            <h2 className="Slogan">Loan and auditing made easy</h2>
+      <div className="FlexContainer">
+        <div className="Sidebar">
+          <div className="Logo">
+            <img className="LogoImage" src={logo} alt="logo" />
+            <div className="Text">
+              <h1 className="SmartLoan">Smart Loan</h1>
+              <h2 className="Slogan">Loan and auditing made easy</h2>
+            </div>
           </div>
+
+          <section className="routes">
+            {routes.map((route) => (
+              <NavLink className="link" to={route.path} key={route.name}>
+                <div className="icon">{route.icon}</div>
+                <div className="LinkText">{route.name}</div>
+              </NavLink>
+            ))}
+          </section>
+          <h3 className="ExtraText">EXTRA</h3>
+          <section className="Extra">
+            {extra.map((extra) => (
+              <NavLink className="link2" to={extra.path} key={extra.name}>
+                <div className="icon2">{extra.icon}</div>
+                <div className="LinkText2">{extra.name}</div>
+              </NavLink>
+            ))}
+          </section>
         </div>
 
-        <section className="routes">
-          {routes.map((route) => (
-            <NavLink className="link" to={route.path} key={route.name}>
-              <div className="icon">{route.icon}</div>
-              <div className="LinkText">{route.name}</div>
-            </NavLink>
-          ))}
-        </section>
-        <h3 className="ExtraText">EXTRA</h3>
-        <section className="Extra">
-          {extra.map((extra) => (
-            <NavLink className="link2" to={extra.path} key={extra.name}>
-              <div className="icon2">{extra.icon}</div>
-              <div className="LinkText2">{extra.name}</div>
-            </NavLink>
-          ))}
-        </section>
+        <div className="searchbarContainer">
+          <SearchBar />
+        </div>
       </div>
       <main>{children}</main>
     </div>

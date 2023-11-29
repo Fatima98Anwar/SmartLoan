@@ -1,4 +1,3 @@
-import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Fragment } from "react";
 import User from "./pages/User";
@@ -11,8 +10,9 @@ import LoanStatus from "./pages/LoanStatus";
 import Dashboard from "./pages/Dashboard";
 import Accounts from "./pages/Accounts";
 import Sidebar from "./Components/Sidebar";
+import "./Upload.css";
 
-function App() {
+const Upload = () => {
   return (
     <>
       <Router>
@@ -33,6 +33,6 @@ function App() {
       </Router>
     </>
   );
-}
+};
 
-export default App;
+export default Upload;

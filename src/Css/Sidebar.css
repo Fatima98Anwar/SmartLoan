@@ -7,18 +7,29 @@
 .main-container {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  height: fit-content;
 }
 
 .FlexContainer {
+  height: fit-content;
   display: flex;
   flex-direction: row;
+  width: 100%;
+  
 }
+.col-flex-container {
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 
+}
 .Sidebar {
   background: #00215b;
   color: white;
   height: 100vh;
-  width: 217px;
+  width: 260px;
   flex-direction: row;
 }
 
@@ -129,10 +140,19 @@ a {
 
 .SidebarContainer {
   float: left;
-  width: 217px;
+  width: 100%;
 }
 
 .RouteContainer {
-  margin-left: 217px;
-  padding: 20px;
+
+  
+  position: relative;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+  
+  margin: auto;
+  margin-top: 70px;
 }

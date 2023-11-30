@@ -13,6 +13,17 @@ import { NavLink } from "react-router-dom";
 import logo from "./logo.png";
 import SearchBar from "../Components/SearchBar";
 import UploadDoc from "../Components/UploadDoc";
+import User from "../pages/User";
+import Transaction from "../pages/Transaction";
+import TrackLoan from "../pages/TrackLoan";
+import Support from "../pages/Support";
+import Settings from "../pages/Settings";
+import PaymentMethod from "../pages/PaymentMenthod";
+import LoanStatus from "../pages/LoanStatus";
+import Dashboard from "../pages/Dashboard";
+import Accounts from "../pages/Accounts";
+import Upload from "../pages/Upload";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const routes = [
   {
@@ -72,7 +83,6 @@ const extra = [
 
 const Sidebar = ({ children }) => {
   return (
-    <div className="main-container">
       <div className="FlexContainer">
         <div className="Sidebar">
           <div className="Logo">
@@ -100,14 +110,32 @@ const Sidebar = ({ children }) => {
               </NavLink>
             ))}
           </section>
+          
         </div>
-
-        <div className="searchbarContainer">
-          <SearchBar />
-        </div>
+        <div className="col-flex-container">
+          <div className="searchbarContainer">
+            <SearchBar />
+          </div>
+          <main>{children}</main>
+          <div className="RouteContainer">
+            <Routes>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/user" element={<User />} />
+              <Route path="/transaction" element={<Transaction />} />
+              <Route path="/trackloan" element={<TrackLoan />} />
+              <Route path="/support" element={<Support />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/paymentmethod" element={<PaymentMethod />} />
+              <Route path="/loanstatus" element={<LoanStatus />} />
+              <Route path="/accounts" element={<Accounts />} />
+              <Route path="/upload" element={<Upload />} />
+              <Route path="*" element={<h1>Not Found</h1>} />
+            </Routes>
+          </div>
       </div>
-      <main>{children}</main>
     </div>
+        
+      
   );
 };
 

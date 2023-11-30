@@ -3,8 +3,8 @@
   flex-direction: column;
   height: 650px;
   width: 1000px;
-  margin-top: 70px;
-  margin-left: 90px;
+  margin-top: 0px;
+  margin-left: 0px;
   border: 2px solid #028ab6;
   box-sizing: border-box;
 }
@@ -93,3 +93,4 @@
 .btn-pdf {
   background-color: #e46e6b;
 }
+

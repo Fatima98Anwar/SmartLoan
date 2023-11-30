@@ -4,12 +4,7 @@
   box-sizing: border-box;
 }
 
-.Sidebar {
-  background: #00215b;
-  color: white;
-  height: 100vh;
-  width: 217px;
-}
+
 
 .routes {
   color: white;

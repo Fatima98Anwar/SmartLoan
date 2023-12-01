@@ -5,8 +5,8 @@ import ScoreInfo from "../Components/ScoreInfo";
 export const Dashboard = () => {
   return (
     <div className="credit-score">
-      <CreditScore creditScore={3} />
       <ScoreInfo creditScore={3} />
+      <CreditScore creditScore={3} />
     </div>
   );
 };

@@ -2,42 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../Css/DisplayJSON.css';
 
 // Initial data
-const initialLoanData = {
-  loan_amnt: 'null',
-  term: 'Nine months',
-  int_rate: '35.99%',
-  installment: 'PKR.. 1000 to be paid per month',
-  annual_inc: 'null',
-  dti: 'null',
-  earliest_cr_line: 'null',
-  open_acc: 'null',
-  pub_rec: 'null',
-  revol_bal: 'null',
-  revol_util: 'null',
-  total_acc: 'null',
-  verification_status_Source_Verified: 'null',
-  verification_status_Verified: 'null',
-  purpose_credit_card: 'null',
-  purpose_debt_consolidation: 'null',
-  purpose_educational: 'null',
-  purpose_home_improvement: 'null',
-  purpose_house: 'null',
-  purpose_major_purchase: 'null',
-  purpose_medical: 'null',
-  purpose_moving: null,
-  purpose_other: null,
-  purpose_renewable_energy: 'null',
-  purpose_small_business: 'null',
-  purpose_vacation: 'null',
-  purpose_wedding: 'null',
-  initial_list_status_w: 'null',
-  application_type_INDIVIDUAL: 'null',
-  application_type_JOINT: 'null',
-  home_ownership_OTHER: 'null',
-  home_ownership_OWN: 'null',
-  home_ownership_RENT: 'null',
-};
-
+const initialLoanData = {'Additional amount/charges for pre payment/early retirement of the loan/finance': '7% of Outstanding Principal amount+ FED will be charged in case the customer wants to opt for early repayment', 'Assistance and redress': 'Contact our 24/7 Contact Centre team at 111-111-HBL (111-111-425), Email address: customer.care@hbl.com, Head Office Address: 9th floor, Service Quality, HBL Plaza LiChundrigar Road, Karachi.', 'Default/late payment information': 'Late Payment charges will be applied', 'Documents provided': "Offer letter, Product Key fact Statement, Terms and Conditions, Amortization schedule, NOC (on customer's request)", 'Estimated cost of this financing': 'Mark-up rate (per annum)', 'Finance Amount': 'PKR, 0000', "Guarantor's obligations": 'N/A', 'In case of death of borrower': "The remaining amount will be covered by the insurance company on Bank's approved panel", 'Installmant charged': 'PKR. 12000 to be paid per year', 'Late payment charges (LPC)': 'Rate applied Rs. 1,250+ FED (per month)', 'Loan/finance can be repaid before the maturity': 'Yes', 'Mark-up rate (per annum)': '%', 'Mark-uptype (Fixed/ Variable)': 'Fixed', 'Monthly installment payable': 'PKR.. 1000 to be paid per month', 'Name of the product': 'HBL Personal Loan', 'Other charges': 'PKR. 1500', 'Processing fee': 'PKR. 5,500 or 1.25% + FED of the finance amount whichever is higher (Inclusive of documentation charges, verification & stamp duty)', 'Repayment of loan/finance before the Maturity': "Contact HBL's 24/7 Phone Banking team at 111-111-425 or visit your nearest HBL Branch and submit 7% of Outstanding Principal amount+ FED will be charged", 'Right of set-off': 'Can Bank exercise right of set-off?', 'Term of financing': 'Nine months', 'Total amount paid for the financing': 'PKR.. 20000'};
 const DisplayJSON = () => {
   // State to hold the editable attributes
   const [loanData, setLoanData] = useState(initialLoanData);

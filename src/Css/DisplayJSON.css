@@ -1,0 +1,46 @@
+/* DisplayJSON.css */
+
+.content-container {
+    max-width: 800px; /* Max width to contain the form */
+    margin: 0 auto; /* Centering the container */
+  }
+  
+  .display-json-container {
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    color: #333;
+    margin-top: 20px; /* Space from top */
+  }
+  
+  .display-json-title {
+    text-align: center;
+    color: #050505; 
+    margin-bottom: 20px; /* Space after the title */
+  }
+  
+  .display-json-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* More space between items */
+  }
+  
+  .display-json-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Allocate space for label and input */
+    gap: 10px; /* Space between label and input */
+  }
+  
+  .display-json-key {
+    font-weight: bold;
+    text-align: right; /* Right align the labels */
+    padding-right: 10px; /* Space before the colon */
+  }
+  
+  .display-json-value {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    width: 100%; /* Full width of the column */
+  }
+  

@@ -12,16 +12,29 @@ import Dashboard from "./pages/Dashboard";
 import Accounts from "./pages/Accounts";
 import Upload from "./pages/Upload";
 import Sidebar from "./Components/Sidebar";
+import DisplayJSON from "./pages/DisplayJSON";
 
 function App() {
   return (
     <Router>
-      <div className="main-container">
-          <Sidebar />
+      <Sidebar>
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/user" element={<User />} />
+          <Route path="/transaction" element={<Transaction />} />
+          <Route path="/trackloan" element={<TrackLoan />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/paymentmethod" element={<PaymentMethod />} />
+          <Route path="/loanstatus" element={<LoanStatus />} />
+          <Route path="/accounts" element={<Accounts />} />
+          <Route path="/upload" element={<Upload />} />
+          <Route path="/displayjson" element={<DisplayJSON />} />
 
-
-      </div>
-
+          <Route path="*" element={<h1>Not Found</h1>} />
+        </Routes>
+      </Sidebar>
+      
     </Router>
   );
 }

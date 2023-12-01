@@ -13,12 +13,11 @@
 
 .FlexContainer {
   display: flex;
-  
+  height: 100%;
   width: 100%;
   
 }
 .col-flex-container {
-  height: fit-content;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -27,7 +26,6 @@
 .Sidebar {
   background: #00215b;
   color: white;
-  height: 100%;
   width: 260px;
 }
 

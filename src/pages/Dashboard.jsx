@@ -1,10 +1,12 @@
 import React from "react";
-import CreditScore from "../Components/CreditScore";
+import CreditScore from "../Components/CreditScoreChart";
+import ScoreInfo from "../Components/ScoreInfo";
 
 export const Dashboard = () => {
   return (
-    <div>
-      <CreditScore />
+    <div className="credit-score">
+      <CreditScore creditScore={3} />
+      <ScoreInfo creditScore={3} />
     </div>
   );
 };

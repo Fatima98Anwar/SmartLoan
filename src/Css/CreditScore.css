@@ -1,8 +1,12 @@
-.position {
-  position: relative;
-  align-items: center;
-  border: 2px solid #72d7f5;
+.containerStyle {
+  display: "flex";
+  flex-direction: column;
+  justify-content: "center";
+  align-items: "center";
+  width: "fit-content";
+  height: "200px";
 }
+
 /*
 import React from "react";
 import { Bar } from "react-chartjs-2";

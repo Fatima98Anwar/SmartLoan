@@ -5,17 +5,19 @@
   width: 1000px;
   margin-top: 0px;
   margin-left: 0px;
-  border: 2px solid #028ab6;
-  box-sizing: border-box;
+
 }
 .innerContainer {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
 }
 .UploadText {
+  display: flex;
+  flex-direction: row;
   margin-top: 50px;
-  align-self: center;
+  margin-bottom: 50px;
+  justify-content: center;
 }
 .PicUpload {
   height: 384px;
@@ -54,19 +56,27 @@
   margin-top: 15px;
 }
 .PdfUpload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 384px;
   width: 341px;
   align-self: flex-end;
-  border: 4px solid #e46e6b;
-  margin-right: 120px;
-  flex-direction: column;
+  border: 2px dashed #e46e6b;
+  transition: background-color 1s, border 1s;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.PdfUpload:hover {
+  border: 2px solid #e46e6b; 
+  background-color: #e6e6e6d2; 
 }
 .pdf {
   height: 120px;
   width: 120px;
   align-self: center;
-  margin-top: 80px;
-  margin-left: 100px;
+
 }
 
 .btn-pdf,

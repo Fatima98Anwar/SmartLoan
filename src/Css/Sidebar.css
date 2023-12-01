@@ -12,9 +12,8 @@
 }
 
 .FlexContainer {
-  height: fit-content;
   display: flex;
-  flex-direction: row;
+  
   width: 100%;
   
 }
@@ -28,9 +27,8 @@
 .Sidebar {
   background: #00215b;
   color: white;
-  height: 100vh;
+  height: 100%;
   width: 260px;
-  flex-direction: row;
 }
 
 .routes {
@@ -138,10 +136,6 @@ a {
   transition: 0.5s;
 }
 
-.SidebarContainer {
-  float: left;
-  width: 100%;
-}
 
 .RouteContainer {
 
@@ -154,5 +148,4 @@ a {
   
   
   margin: auto;
-  margin-top: 70px;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import pic from "../Components/images/pic.png";
-import pdf from "../Components/images/pdf.png";
+import pdf from "../Components/images/pdf.svg";
 import { useState, useRef } from "react";
 export const UploadDoc = () => {
   const [drag, setDrag] = useState(null);
@@ -13,6 +13,16 @@ export const UploadDoc = () => {
     console.log("File dropped");
     setDrag(event.dataTransfer.files);
   };
+
+  
+  const handleFiles = (event) => {
+    setDrag(event.target.files);
+  };
+
+  const handleClick = () => {
+    inputRef.current.click();
+  };
+
   if (drag)
     return (
       <div className="Uploads">
@@ -23,53 +33,31 @@ export const UploadDoc = () => {
         </ul>
       </div>
     );
-  return (
-    <div className="Upload-Container">
-      <h1 className="UploadText">Choose your Upload</h1>
-      <div className="innerContainer">
-        <div
-          className={`PicUpload ${drag ? "drag-over" : ""}`}
-          onDragOver={handleDragOver}
-          onDrop={handleDrop}
-        >
-          <h4 className="picText1">Upload a series of images</h4>
-          <h5 className="picText2">Drag and drop files here</h5>
-          <img className="pic" src={pic} alt="picUpload" />
-          <h6 className="picText3">PNG or JPG</h6>
-          {!drag && (
-            <div className="Dropzone">
-              <input
-                type="file"
-                multiple
-                onChange={(event) => setDrag(event.target.files)}
-                hidden
-                ref={inputRef}
-              />
-              <button
-                className="btn-pic"
-                onClick={() => inputRef.current.click()}
-              >
-                Add file
-              </button>
-            </div>
-          )}
-        </div>
-        <div
-          className={`PdfUpload ${drag ? "drag-over" : ""}`}
-          onDragOver={handleDragOver}
-          onDrop={handleDrop}
-        >
-          <h4 className="pdfText1">Drag and drop files here</h4>
-          <h5 className="pdfText2">Loan Application</h5>
-          <img className="pdf" src={pdf} alt="pdfUpload" />
-          <h6 className="pdfText3">PDF</h6>
-          <button className="btn-pdf" onClick={() => inputRef.current.click()}>
-            Add file
-          </button>
+
+    return (
+      <div className="Upload-Container">
+        <h1 className="UploadText">Upload PDF</h1>
+        <div className="innerContainer">
+          <div
+            className={`PdfUpload ${drag ? "drag-over" : ""}`}
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+            onClick={handleClick}  // This will trigger the file input when the div is clicked
+          >
+            {/* <h4 className="pdfText1">Drag and drop files here</h4> */}
+            <img className="pdf" src={pdf} alt="pdfUpload" />
+            {/* <h6 className="pdfText3">PDF</h6> */}
+            <input
+              type="file"
+              ref={inputRef}
+              onChange={handleFiles}
+              style={{ display: 'none' }}  // Hide the file input
+              multiple  // Remove this if you want to limit to single file uploads
+            />
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
-
-export default UploadDoc;
+    );
+  };
+  
+  export default UploadDoc;

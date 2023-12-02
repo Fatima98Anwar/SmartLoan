@@ -142,3 +142,20 @@ a {
   right: 0;
   margin: auto;
 }
+
+/* Remove the horizontal line */
+.Text::after {
+  content: "";
+  width: 175%;
+  height: 0; /* Set height to 0 to remove the line */
+  /* ... */
+}
+
+/* Style the active links */
+.link.active,
+.link2.active {
+  background-color: #2997bb; /* Set the background color for active links */
+  color: white; /* Set the text color for active links */
+  border-radius: 5px;
+  transition: 0.5s;
+}

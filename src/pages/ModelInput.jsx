@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../Css/ModelInput.css';
 const ModelInput = () => {
   const initialData = {
-    "loan_amnt": "missing",
+    "loan_amnt": 50000,
     "term": 9,
     "int_rate": 7,
     "installment": 1000,
@@ -53,45 +53,69 @@ const ModelInput = () => {
     setData(updatedData);
   };
   const handleInputChange = (key, value) => {
-    setData((prevData) => ({
-      ...prevData,
-      [key]: value,
-    }));
-  };
-  const processData = (inputData) => {
+    const newValue = value !== '' ? value : 'missing';
+    setData(prevData => {
+      const newData = { ...prevData, [key]: newValue };
+      return processData(newData); // Process data with updated value
+    });
+  };const processData = (inputData) => {
     let updatedData = { ...inputData };
-
-
+  
+    // Convert numeric strings to numbers
+    const loanAmnt = updatedData.loan_amnt !== 'missing' ? parseFloat(updatedData.loan_amnt) : 'missing';
+    const term = updatedData.term !== 'missing' ? parseFloat(updatedData.term) : 'missing';
+    const installment = updatedData.installment !== 'missing' ? parseFloat(updatedData.installment) : 'missing';
+    const annualInc = updatedData.annual_inc !== 'missing' ? parseFloat(updatedData.annual_inc) : 'missing';
+  
+    // Calculate loan_amnt, installment, and term
+    if (loanAmnt === 'missing' && term !== 'missing' && installment !== 'missing') {
+      updatedData.loan_amnt = installment * term;
+    } else if (installment === 'missing' && loanAmnt !== 'missing' && term !== 'missing') {
+      updatedData.installment = loanAmnt / term;
+    } else if (term === 'missing' && loanAmnt !== 'missing' && installment !== 'missing') {
+      updatedData.term = loanAmnt / installment;
+    }
+  
+    // Calculate dti
+    if (updatedData.dti === 'missing' && annualInc !== 'missing') {
+      if (installment !== 'missing') {
+        updatedData.dti = (installment * 12) / annualInc;
+      } else if (loanAmnt !== 'missing') {
+        updatedData.dti = loanAmnt / annualInc;
+      }
+    }
+  
+    // Process other fields
     Object.keys(updatedData).forEach(key => {
       if ((key.startsWith('purpose_') || key.startsWith('home_ownership_')) && updatedData[key] === 'missing') {
         updatedData[key] = false;
       }
-      if(key.startsWith('application_type_I'))
-      {
+      if(key.startsWith('application_type_I')) {
         updatedData[key] = true;
       }
-      if(key.startsWith('application_type_J'))
-      {
+      if(key.startsWith('application_type_J')) {
         updatedData[key] = false;
       }
-      if(key.startsWith('verification_status_'))
-      {
+      if(key.startsWith('verification_status_')) {
         updatedData[key] = true;
       }
-        if(key.startsWith('initial_list_status_w'))
-        {
-            updatedData[key] = true;
-        }
+      if(key.startsWith('initial_list_status_w')) {
+        updatedData[key] = true;
+      }
     });
-
+  
     return updatedData;
   };
+  
 
   useEffect(() => {
     const processedData = processData(data);
     setData(processedData);
   }, []);
-
+  useEffect(() => {
+    processData(initialData); // Initial processing of data
+  }, []);
+  
   return (
     <div className="content-container">
     <div className="display-json-container">

@@ -1,70 +1,49 @@
-/* DisplayJSON.css */
-.loading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Makes the container cover the entire viewport height */
-}
-
-.loading-circle {
-  border: 4px solid #f3f3f3; /* Light gray border */
-  border-top: 4px solid #3498db; /* Blue border for the animation */
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 2s linear infinite; /* Rotation animation */
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
+/* ModelInput.css */
 .content-container {
     max-width: 800px; /* Max width to contain the form */
     margin: 0 auto; /* Centering the container */
-  }
+}
   
-  .display-json-container {
+.model-input-container {
     padding: 20px;
     background-color: #f4f4f4;
     border-radius: 8px;
     color: #333;
     margin-top: 20px; /* Space from top */
-  }
+}
   
-  .display-json-title {
+.model-input-title {
     text-align: center;
     color: #050505; 
     margin-bottom: 20px; /* Space after the title */
-  }
+}
   
-  .display-json-details {
+.model-input-details {
     display: flex;
     flex-direction: column;
     gap: 15px; /* More space between items */
-  }
+}
   
-  .display-json-item {
+.model-input-item {
     display: grid;
     grid-template-columns: 1fr 2fr; /* Allocate space for label and input */
     gap: 10px; /* Space between label and input */
-  }
+}
   
-  .display-json-key {
+.model-input-key {
     font-weight: bold;
     text-align: right; /* Right align the labels */
     padding-right: 10px; /* Space before the colon */
-  }
+}
   
-  .display-json-value {
+.model-input-value {
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 8px;
     width: 100%; /* Full width of the column */
-  }
+}
   
-  .navigate-button {
+.process-data-button {
     display: flex;
     justify-content: center;
     background-color: #028ab6; /* Choose a color that fits your design */
@@ -73,20 +52,31 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 75px;
+    margin-top: 20px;
     font-size: 16px;
     transition: background-color 0.3s;
   
     &:hover {
       background-color: #2874a6; /* Darker shade for hover */
     }
-  }
-  .details-button-container {
+}
+.button-container {
     display: flex;
-    justify-content: space-between; /* Aligns children to each end */
-    align-items: start; /* Aligns children at the top */
+    justify-content: flex-end; /* Aligns the button to the right */
+    margin-top: 20px; /* Spacing from the form elements */
   }
   
-  .display-json-details {
-    flex-grow: 1; /* Allows the details section to take available space */
+  .process-data-button {
+    padding: 10px 15px;
+    background-color: #028ab6; /* Color for the button */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background-color: #2874a6; /* Darker shade for hover */
+    }
   }

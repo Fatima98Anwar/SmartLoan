@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../Css/DisplayJSON.css';
-import { useLocation } from 'react-router-dom';
 
 // Initial data
 const initialLoanData = {'x': '123'};
@@ -9,9 +9,13 @@ const DisplayJSON = () => {
   const [isLoading, setIsLoading] = useState(false); // State to track loading status
   const location = useLocation();
   const dataFetchedRef = useRef(false);
+  const navigate = useNavigate(); // Hook for navigation, called inside the component
 
   const file = location.state?.file;
 
+  const navigateToModelInput = () => {
+    navigate('/modelinput', { state: { rawJson: initialLoanData } });
+  };
 
 
 
@@ -22,6 +26,8 @@ const DisplayJSON = () => {
 
 
   }, [])
+
+
 
   const uploadAndProcessFile = async (file) => {
 
@@ -70,8 +76,11 @@ const DisplayJSON = () => {
   }
   return (
     <div className="content-container">
-      <div className="display-json-container">
-        <h2 className="display-json-title">OCR Response</h2>
+    <div className="display-json-container">
+      <h2 className="display-json-title">OCR Response</h2>
+      
+      {/* Flex container for details and button */}
+      <div className="details-button-container">
         <div className="display-json-details">
           {Object.entries(loanData).map(([key, value]) => (
             <div key={key} className="display-json-item">
@@ -94,11 +103,17 @@ const DisplayJSON = () => {
                   className="display-json-value"
                 />
               )}
-            </div>
+            </div>            
           ))}
         </div>
+
+        {/* Button for navigation */}
+        <button className="navigate-button" onClick={navigateToModelInput}>
+          Generate Credit Score
+        </button>
       </div>
     </div>
+  </div>
   );
 };
 

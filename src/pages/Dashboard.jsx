@@ -42,7 +42,7 @@ const gradeMappings = {
 };
 
 const Dashboard = () => {
-  const creditScore = 9; // Hardcoded credit score value
+  const creditScore = 4; // Hardcoded credit score value
   const scoreMapping = gradeMappings[creditScore];
 
   if (!scoreMapping) {

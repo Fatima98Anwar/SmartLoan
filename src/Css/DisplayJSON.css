@@ -63,6 +63,13 @@
     padding: 8px;
     width: 100%; /* Full width of the column */
   }
+
+  .display-json-value-ownership, .display-json-value-purpose {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    width: 100%; /* Full width of the column */
+  }
   
   .navigate-button {
     display: flex;

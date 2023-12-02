@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import CreditScore from "../Components/CreditScoreChart";
 import '../Css/Dashboard.css';
+
 
 // Define a mapping for the scores to grades and their descriptions
 const gradeMappings = {
@@ -42,14 +44,62 @@ const gradeMappings = {
 };
 
 const Dashboard = () => {
-  const creditScore = 4; // Hardcoded credit score value
+  const location = useLocation();
+
+  const [creditScore, setCreditScore] = useState(4);
   const scoreMapping = gradeMappings[creditScore];
+  const rawJson = location.state?.rawJson;
+  const dataFetchedRef = useRef(false);
+  const [isLoading, setIsLoading] = useState(false); // State to track loading status
+
+  
+  useEffect(() => {
+
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
+    fetchCreditScore();
+  }, []);
+
+  const fetchCreditScore = async () => {
+    setIsLoading(true); // Set loading to true while the request is in progress
+  
+    try {
+      const response = await fetch('http://localhost:6902/predict', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json', // Specify the content type
+        },
+        body: JSON.stringify(rawJson), // Correctly format the body as a JSON string
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const rep_data = await response.json();
+      setCreditScore(rep_data['Predicted Sub-Grade Value'] | 0);
+      console.log(rep_data['Predicted Sub-Grade Value'] | 0)
+    } catch (error) {
+      console.error('Upload error:', error);
+      // Handle errors here
+    } finally {
+      setIsLoading(false); // Set loading to false when the request is completed
+    }
+  };
 
   if (!scoreMapping) {
     return <div className="dashboard-container">Invalid credit score provided.</div>;
   }
 
   const { grade, riskLevel, description, interestRates } = scoreMapping;
+
+  if (isLoading) {
+    return (
+      <div className="loading-container">
+        <div className="loading-circle"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="dashboard-container">

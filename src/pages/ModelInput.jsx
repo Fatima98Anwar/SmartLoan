@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../Css/ModelInput.css';
 
 const ModelInput = () => {
+  const navigate = useNavigate(); // Hook for navigation, called inside the component
 
   const location = useLocation();
   const rawJson = location.state?.rawJson;
@@ -63,7 +64,39 @@ const ModelInput = () => {
       setData(rep_data);
     } catch (error) {
       console.error('Upload error:', error);
-      // Handle errors here
+      setData(  {
+        "loan_amnt": "missing",
+        "term": 9,
+        "int_rate": 7,
+        "installment": 1000,
+        "annual_inc": "missing",
+        "dti": "missing",
+        "earliest_cr_line": "missing",
+        "open_acc": "missing",
+        "pub_rec": "missing",
+        "total_acc": "missing",
+        "verification_status_Source Verified": "missing",
+        "verification_status_Verified": "missing",
+        "purpose_credit_card": "missing",
+        "purpose_debt_consolidation": "missing",
+        "purpose_educational": "missing",
+        "purpose_home_improvement": "missing",
+        "purpose_house": "missing",
+        "purpose_major_purchase": "missing",
+        "purpose_medical": "missing",
+        "purpose_moving": "missing",
+        "purpose_other": true,
+        "purpose_renewable_energy": "missing",
+        "purpose_small_business": "missing",
+        "purpose_vacation": "missing",
+        "purpose_wedding": "missing",
+        "initial_list_status_w": "missing",
+        "application_type_INDIVIDUAL": "missing",
+        "application_type_JOINT": "missing",
+        "home_ownership_OTHER": "missing",
+        "home_ownership_OWN": "missing",
+        "home_ownership_RENT": "missing"
+      });
     } finally {
       setIsLoading(false); // Set loading to false when the request is completed
     }
@@ -330,8 +363,8 @@ const ModelInput = () => {
           className="process-data-button"
           onClick={() => {
             if (validateInputs()) {
-              // Proceed with processing data
-              // You can add your logic here to proceed if validation passes
+              navigate('/dashboard', { state: { rawJson: data } });
+
               console.log('Inputs are valid. Processing data...');
             }
           }}

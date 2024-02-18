@@ -13,6 +13,7 @@ import Accounts from "./pages/Accounts";
 import Upload from "./pages/Upload";
 import Sidebar from "./Components/Sidebar";
 import DisplayJSON from "./pages/DisplayJSON";
+import ModelInput from "./pages/ModelInput";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/accounts" element={<Accounts />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/displayjson" element={<DisplayJSON />} />
+          <Route path="/modelinput" element={<ModelInput />} />
 
           <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>

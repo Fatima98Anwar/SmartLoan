@@ -1,8 +1,154 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import CreditScore from "../Components/CreditScoreChart";
+import Web3 from 'web3';
+
 import '../Css/Dashboard.css';
 
+const web3 = new Web3(window.ethereum); // Assuming MetaMask is available
+const contractAddress = "0x0CD8D7981bCc3feA929271380B7d00414C05dcC2";
+const contractABI = [
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "creditScores",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "credit_score",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "date_generated",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "lender_id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "application_id",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_user_id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_credit_score",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_date_generated",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_lender_id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_application_id",
+        "type": "uint256"
+      }
+    ],
+    "name": "storeCreditScoreData",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_user_id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
+      }
+    ],
+    "name": "getCreditScoreData",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "credit_score",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "date_generated",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "lender_id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "application_id",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct CreditScoreData.CreditScore",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_user_id",
+        "type": "uint256"
+      }
+    ],
+    "name": "getCreditScoreCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  }
+];
 
 // Define a mapping for the scores to grades and their descriptions
 const gradeMappings = {
@@ -51,14 +197,66 @@ const Dashboard = () => {
   const rawJson = location.state?.rawJson;
   const dataFetchedRef = useRef(false);
   const [isLoading, setIsLoading] = useState(false); // State to track loading status
+  const contract = new web3.eth.Contract(contractABI, contractAddress);
+  const [creditScores, setCreditScores] = useState([]);
 
   
   useEffect(() => {
-
+    const loadCreditScores = async () => {
+      const userId = 0; // Replace with dynamic user ID as needed
+      const scores = await fetchAllCreditScores(userId);
+      setCreditScores(scores);
+    };
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
     fetchCreditScore();
+    loadCreditScores();
+
   }, []);
+
+
+  const fetchAllCreditScores = async (userId) => {
+    try {
+      const scoresCount = await contract.methods.getCreditScoreCount(userId).call();
+      const scores = [];
+      for (let i = 0; i < scoresCount; i++) {
+        const scoreData = await contract.methods.getCreditScoreData(userId, i).call();
+        scores.push(scoreData);
+      }
+      return scores;
+    } catch (error) {
+      console.error('Error fetching credit scores:', error);
+      return [];
+    }
+  };
+  
+
+  async function requestAccount() {
+    try {
+      const accounts = await window.ethereum.request({
+        method: 'eth_requestAccounts',
+      });
+      return accounts[0];
+    } catch (error) {
+      console.error('User denied account access');
+      return null;
+    }
+  }
+  // Function to store credit score data
+  async function storeCreditScoreData(userId, creditScore, dateGenerated, lenderId, applicationId) {
+
+    const accountAddress = await requestAccount();
+
+    await contract.methods.storeCreditScoreData(userId, creditScore, dateGenerated, lenderId, applicationId)
+      .send({ from: accountAddress })
+      .then(function(result) {
+        console.log(result);
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+  }
+
 
   const fetchCreditScore = async () => {
     setIsLoading(true); // Set loading to true while the request is in progress
@@ -77,8 +275,20 @@ const Dashboard = () => {
       }
   
       const rep_data = await response.json();
-      setCreditScore(rep_data['Predicted Sub-Grade Value'] | 0);
-      console.log(rep_data['Predicted Sub-Grade Value'] | 0)
+      let credit_score = rep_data['Predicted Sub-Grade Value'] | 0;
+      if (credit_score < 1) {
+        credit_score = 1;
+      }
+      else if (credit_score > 35) {
+        credit_score = 35;
+      }
+      setCreditScore(credit_score);
+      console.log(credit_score);
+      const date = new Date(); // This will be the current date and time
+      const timestamp = Math.floor(date.getTime() / 1000); // Convert to Unix timestamp in seconds
+
+      storeCreditScoreData(0, credit_score, timestamp, 0, 0);
+
     } catch (error) {
       console.error('Upload error:', error);
       // Handle errors here
@@ -119,6 +329,31 @@ const Dashboard = () => {
           <p>Interest Rates: {interestRates}</p>
         </div>
       </div>
+
+      <div className="previous-credit-scores">
+        <h2>Previous Credit Scores</h2>
+        <table className="credit-scores-table">
+          <thead>
+            <tr>
+              <th>Score</th>
+              <th>Date Generated</th>
+              <th>Lender ID</th>
+              <th>Application ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            {creditScores.map((score, index) => (
+              <tr key={index}>
+                <td className="credit-score-highlight">{score.credit_score.toString()}</td>
+                <td>{new Date(Number(score.date_generated) * 1000).toLocaleString()}</td>
+                <td>{score.lender_id.toString()}</td>
+                <td>{score.application_id.toString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
     </div>
   );
 };

@@ -26,6 +26,8 @@
   }
   
   .display-json-container {
+    display: flex;
+    flex-direction: column;
     padding: 20px;
     background-color: #f4f4f4;
     border-radius: 8px;
@@ -89,7 +91,7 @@
     }
   }
   .details-button-container {
-    display: flex;
+    align-items: center;
     justify-content: space-between; /* Aligns children to each end */
     align-items: start; /* Aligns children at the top */
   }

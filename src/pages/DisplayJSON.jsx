@@ -14,7 +14,7 @@ const DisplayJSON = () => {
   const file = location.state?.file;
 
   const navigateToModelInput = () => {
-    navigate('/modelinput', { state: { rawJson: initialLoanData } });
+    navigate('/modelinput', { state: { rawJson: loanData } });
   };
 
 

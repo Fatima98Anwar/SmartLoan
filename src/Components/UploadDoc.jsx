@@ -13,6 +13,15 @@ export const UploadDoc = () => {
     event.preventDefault();
   };
 
+  const handleFiles = (event) => {
+    const uploadedFile = event.target.files[0];
+    if (uploadedFile) {
+      console.log(uploadedFile);
+      setFile(uploadedFile);
+      navigate('/displayjson', { state: { file: uploadedFile } });
+    }
+  };
+  
   const handleDrop = (event) => {
     event.preventDefault();
     console.log("File dropped");
@@ -20,18 +29,11 @@ export const UploadDoc = () => {
     if (files.length > 0) {
       const uploadedFile = files[0];
       setFile(uploadedFile);
-      // You might want to navigate after setting the file
+      navigate('/displayjson', { state: { file: uploadedFile } });
     }
     setDrag(files);
   };
-
-  const handleFiles = (event) => {
-    const uploadedFile = event.target.files[0]; // Assuming single file upload
-    if (uploadedFile) {
-      setFile(uploadedFile);
-      navigate('/displayjson', { state: { filePath: uploadedFile.path } }); // Navigate to DisplayJSON component
-    }
-  };
+  
 
   const handleClick = () => {
     inputRef.current.click();
